@@ -1,6 +1,7 @@
 package com.example.madlevel6task2
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,10 +36,9 @@ class ListFragment : Fragment() {
     private fun initViews() {
         movies = arrayListOf()
         movieAdapter = MovieAdapter(movies, requireContext())
-        viewManager = GridLayoutManager(activity, 2)
-        //manager?
+        //viewManager = GridLayoutManager(activity, 2) // nodig?
         gvMovies.adapter = movieAdapter
-        //observeMovies()
+        observeMovies()
     }
 
     private fun observeMovies() {
@@ -54,12 +54,3 @@ class ListFragment : Fragment() {
     }
 
 }
-
-// get popular movies by release date
-// use id for photo and put image in list with glide
-
-// API:KEY: 4e3a4dca7cbfff7bfd8ac3c401a0b5a3
-
-// JUST ADD YEAR AFTER URL IN MOVIESERVICE
-//https://api.themoviedb.org/3/discover/movie?api_key=###&year=2015&sort_by=popularity.desc
-

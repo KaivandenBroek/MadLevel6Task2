@@ -5,25 +5,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object ServiceBuilder { //https://api.themoviedb.org/3/
+object ServiceBuilder {
     private const val URL = "https://api.themoviedb.org/3/"
-//    //create http client
-//    private val okHttp = OkHttpClient.Builder()
-//
-//    //retrofit builder
-//    private val builder = Retrofit.Builder().baseUrl(URL)
-//        .addConverterFactory(GsonConverterFactory.create())
-//        .client(okHttp.build())
-//
-//    //create retrofit instance
-//    private val retrofit = builder.build()
-//
-//    //we will use this class to create an anonymous inner class function that
-//    //implements Country service Interface
-//
-//    fun <T> buildService (serviceType :Class<T>):T{
-//        return retrofit.create(serviceType)
-//    }
 
     fun createApi(): MovieService{
         // Create an OkHttpClient to be able to make a log of the network traffic
@@ -32,13 +15,13 @@ object ServiceBuilder { //https://api.themoviedb.org/3/
                 .build()
 
         // Create the Retrofit instance
-        val triviaApi = Retrofit.Builder()
+        val movieApi = Retrofit.Builder()
                 .baseUrl(URL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
         // Return the Retrofit TriviaApiService
-        return triviaApi.create(MovieService::class.java)
+        return movieApi.create(MovieService::class.java)
     }
 }

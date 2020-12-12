@@ -2,6 +2,7 @@ package com.example.madlevel6task2
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
 import kotlinx.coroutines.withTimeout
 
 class MovieRepository {
@@ -14,7 +15,7 @@ class MovieRepository {
      * Encapsulation :)
      */
     val movie: LiveData<List<Movie>>
-    get() = _movie
+        get() = _movie
 
     suspend fun getPopularMovies(year: String) {
         try {
@@ -27,5 +28,6 @@ class MovieRepository {
             throw MovieSearchError("Unable te retrieve data", error)
         }
     }
+
     class MovieSearchError(message: String, cause: Throwable) : Throwable(message, cause)
 }
