@@ -5,8 +5,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object ServiceBuilder {
-    private const val URL = "https://api.themoviedb.org/3/discover/"
+object ServiceBuilder { //https://api.themoviedb.org/3/
+    private const val URL = "https://api.themoviedb.org/3/"
 //    //create http client
 //    private val okHttp = OkHttpClient.Builder()
 //

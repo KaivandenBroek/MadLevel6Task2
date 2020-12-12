@@ -1,25 +1,21 @@
 package com.example.madlevel6task2
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.fragment_list.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class ListFragment : Fragment() {
-    private lateinit var viewModel: MovieViewModel
     private lateinit var movies: ArrayList<Movie>
     private lateinit var movieAdapter: MovieAdapter
     private lateinit var viewManager: GridLayoutManager
+
+    private val viewModel: MovieViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,7 +27,7 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         btnSearch.setOnClickListener {
-            viewModel.getMovieList()
+            viewModel.getMovieList(tfYear.text.toString())
         }
         initViews()
     }
@@ -42,7 +38,7 @@ class ListFragment : Fragment() {
         viewManager = GridLayoutManager(activity, 2)
         //manager?
         gvMovies.adapter = movieAdapter
-        observeMovies()
+        //observeMovies()
     }
 
     private fun observeMovies() {

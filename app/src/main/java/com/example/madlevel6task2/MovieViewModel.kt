@@ -22,13 +22,13 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
      */
     val errorText: LiveData<String>
         get() = _errorText
-    fun getMovieList() {
+    fun getMovieList(year: String) {
         viewModelScope.launch {
             try {
-                movieRepo.getPopularMovies()
+                movieRepo.getPopularMovies(year)
             } catch (error: MovieRepository.MovieSearchError) {
                 _errorText.value = error.message
-                Log.e("Trivia error", error.cause.toString())
+                Log.e("Movie error", error.cause.toString())
             }
 
         }
