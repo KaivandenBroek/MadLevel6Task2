@@ -12,21 +12,8 @@ class MovieRepository {
     private val movieService: MovieService = ServiceBuilder.createApi()
 
     //private var _movie: MutableLiveData<MovieResponse> = MutableLiveData()
-    private var movie: MutableLiveData<Movie> = MutableLiveData()
+    var movie: MutableLiveData<Movie> = MutableLiveData()
 
-//    /**
-//     * Expose non MutableLiveData via getter
-//     * Encapsulation :)
-//     */
-//    val movie: LiveData<Movie>
-//        get() = _movie
-
-
-    /**
-     * Push movie that has been selected by the user to live data object
-     * that is being observed somewhere else so the movie will be rendered
-     * into the fragment.
-     */
     fun showMovie(newMovie: Movie)  {
         movie.value = newMovie
     }
@@ -39,7 +26,6 @@ class MovieRepository {
 //            }
 //            // use gson for data handling
 //            val gson = GsonBuilder().create()
-//            // TODO CREATE DATA CLASS MOVIERESPONSE?
 //            val newMovies = gson.fromJson(result, MovieResponse::class.java)
 //
 //            println(newMovies)

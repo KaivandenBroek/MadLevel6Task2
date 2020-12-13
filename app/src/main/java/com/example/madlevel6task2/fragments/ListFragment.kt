@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.GridLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_list.*
 class ListFragment : Fragment() {
     private var movies = arrayListOf<Movie>()
     private lateinit var movieAdapter: MovieAdapter
-    private val viewModel: MovieViewModel by viewModels()
+    private val viewModel: MovieViewModel by activityViewModels()
     private val viewModelMInfo: MovieInfoViewModel by viewModels()
 
     override fun onCreateView(

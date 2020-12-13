@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 class MovieViewModel(application: Application) : AndroidViewModel(application) {
 
     private val movieRepo = MovieRepository()
-    //val movie = movieRepo.
+    val movie = movieRepo.movie
     private val _errorText: MutableLiveData<String> = MutableLiveData()
 
     /**

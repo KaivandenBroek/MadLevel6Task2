@@ -31,27 +31,19 @@ class MovieAdapter(var arrayList: List<Movie>, private val onClick: (Movie) -> U
      */
     override fun getItemCount(): Int = arrayList.size
 
-    /**
-     * Initialise data binding.
-     */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.databind(arrayList[position], position)
+        holder.bind(arrayList[position], position)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        /**
-         * Fill movie item with data
-         */
-        fun databind(movie: Movie, position: Int) {
+        fun bind(movie: Movie, position: Int) {
             val actualIndex = position+1
             itemView.tvMovieNumber.text = actualIndex.toString()
             Glide.with(context).load(movie.getMovieImage()).into(itemView.ivMovie)
         }
 
-        /**
-         * Setup on click listener to open detailed view for movie
-         */
+        // give movie to bannerclick
         init {
             itemView.setOnClickListener {
                 onClick(arrayList[adapterPosition])
