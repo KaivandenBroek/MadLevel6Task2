@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListFragment">
+    tools:context=".fragments.ListFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,13 +49,25 @@
                 android:text="@string/submit" />
         </LinearLayout>
 
-        <GridView
-            android:id="@+id/gvMovies"
-            android:numColumns="2"
-            android:verticalSpacing="10dp"
-            android:horizontalSpacing="10dp"
+<!--        <GridView-->
+<!--            android:id="@+id/gvMovies"-->
+<!--            android:numColumns="2"-->
+<!--            android:verticalSpacing="10dp"-->
+<!--            android:horizontalSpacing="10dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent" />-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMovies"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

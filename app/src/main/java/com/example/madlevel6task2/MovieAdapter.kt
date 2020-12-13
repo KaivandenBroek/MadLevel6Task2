@@ -6,44 +6,56 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.madlevel6task2.model.Movie
+import com.example.madlevel6task2.model.MovieResponse
 import kotlinx.android.synthetic.main.card_movie_item.view.*
 
-class MovieAdapter(var arrayList: ArrayList<Movie>, var context: Context ) : BaseAdapter() {
+class MovieAdapter(var arrayList: List<Movie>, private val onClick: (Movie) -> Unit) :
+    RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
-    override fun getCount(): Int {
-        return arrayList.size
+    private lateinit var context: Context
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        context = parent.context
+
+        return ViewHolder(
+            LayoutInflater.from(context).inflate(R.layout.card_movie_item, parent, false)
+        )
     }
 
-    override fun getItem(position: Int): Any {
-        return arrayList[position]
+    /**
+     * Returns the amount of movies that are currently shown in the overview
+     * @return [Int] Amount of movies
+     */
+    override fun getItemCount(): Int = arrayList.size
+
+    /**
+     * Initialise data binding.
+     */
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.databind(arrayList[position], position)
     }
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        var view = convertView
-        if(view == null) {
-            view = layoutInflater.inflate(R.layout.card_movie_item, parent,  false)
+        /**
+         * Fill movie item with data
+         */
+        fun databind(movie: Movie, position: Int) {
+            val actualIndex = position+1
+            itemView.tvMovieNumber.text = actualIndex.toString()
+            Glide.with(context).load(movie.getMovieImage()).into(itemView.ivMovie)
         }
 
-        //TODO !! weghalen
-        val number: TextView = view!!.findViewById(R.id.tvMovieNumber)
-        val listItem : Movie = arrayList[position]
-
-        // fill poster and number
-        Glide.with(context).load(listItem.poster).into(view.ivMovie)
-        number.text = (position+1).toString()
-
-//        val view: View = View.inflate(context, R.layout.card_movie_item, null)
-
-//        Glide.with(context).load(listItem.getImageUrl()).into(view.ivMovie)
-
-        return view
+        /**
+         * Setup on click listener to open detailed view for movie
+         */
+        init {
+            itemView.setOnClickListener {
+                onClick(arrayList[adapterPosition])
+            }
+        }
     }
-
 }
