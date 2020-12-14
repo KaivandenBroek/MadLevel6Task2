@@ -10,34 +10,27 @@ import kotlinx.coroutines.withTimeout
 
 class MovieRepository {
     private val movieService: MovieService = ServiceBuilder.createApi()
+    val movieData: MutableLiveData<MovieResponse> = MutableLiveData()
 
-    //private var _movie: MutableLiveData<MovieResponse> = MutableLiveData()
     var movie: MutableLiveData<Movie> = MutableLiveData()
 
-    fun showMovie(newMovie: Movie)  {
+    fun showMovie(newMovie: Movie) {
         movie.value = newMovie
     }
 
-//    suspend fun getPopularMovies(year: String) {
-//        try {
-//            //timeout the request after 5 seconds
-//            val result = withTimeout(5_000) {
-//                movieService.getMoviesList(year)
-//            }
-//            // use gson for data handling
-//            val gson = GsonBuilder().create()
-//            val newMovies = gson.fromJson(result, MovieResponse::class.java)
-//
-//            println(newMovies)
-//
-//            _movie.value = newMovies
-//
-//        } catch (error: Throwable) {
-//            throw MovieSearchError("Unable te retrieve data", error)
-//        }
-//    }
+    suspend fun getMovies(year: String) {
 
-    class MovieList(val movies: MutableLiveData<List<MovieResponse>>)
+        try {
+            val result = movieService.getMoviesList(year)
+            movieData.value = result
+
+        } catch (error: Throwable) {
+            throw Error(
+                "Something went wrong while fetching API", error
+            );
+        }
+
+    }
 
     class MovieSearchError(message: String, cause: Throwable) : Throwable(message, cause)
 }

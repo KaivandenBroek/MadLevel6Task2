@@ -35,13 +35,8 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
 //        }
 //    }
 
-    /**
-     * This function runs whenever someone clicks on a movie they
-     * want to view in detail. The function that is being called
-     * will store the selected movie into a livedata object
-     * that is then being observed by another function that will
-     * actually fill in all data into the fragment.
-     */
+
+    // insert detail to infopage by clicked movie
     fun setMovie(newMovie: Movie) {
         viewModelScope.launch {
             movieRepo.showMovie(newMovie)

@@ -3,13 +3,13 @@ package com.example.madlevel6task2.viewmodels
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.madlevel6task2.repositories.MovieInfoRepository
+import com.example.madlevel6task2.repositories.MovieRepository
 import kotlinx.coroutines.launch
 
 class MovieInfoViewModel (application: Application) : AndroidViewModel(application) {
 
-    private val movieInfoRepository = MovieInfoRepository()
-    val movieData = movieInfoRepository.movieData
+    private val movieRepository = MovieRepository()
+    val movieData = movieRepository.movieData
 
     /**
      * Initialised API call and fetches a list of movies from a certain
@@ -18,7 +18,7 @@ class MovieInfoViewModel (application: Application) : AndroidViewModel(applicati
      */
     fun getMoviesByYear(year: String) {
         viewModelScope.launch {
-            movieInfoRepository.getMovies(year)
+            movieRepository.getMovies(year)
         }
     }
 }
